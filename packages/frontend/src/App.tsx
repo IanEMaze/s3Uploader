@@ -40,10 +40,6 @@ function App() {
 
     setLoading(true);
 
-    // const binary = new Binary()
-
-    // onst formData = new FormData();
-    // formData.append('file', selectedFile);
     const blob = new Blob([selectedFile], { type: 'image/jpeg' });
 
     // Extract filename from the selected file
