@@ -1,25 +1,10 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "plugin:node/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["prettier", "@typescript-eslint"],
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "typescript": {}
-    }
-  },
+  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "plugins": ["prettier"],
   "rules": {
     "import/extensions": "off",
     "no-unused-vars": "error",
-    "no-console": "off",
-    "import/prefer-default-export": "off",
-    "node/no-missing-import": "off"
+    "no-console": "warn",
+    "import/prefer-default-export": "off"
   }
 }
