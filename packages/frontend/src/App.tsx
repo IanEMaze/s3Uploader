@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const API_URL = import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL;
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [response, setresponse] = useState<string | ''>('');
@@ -40,8 +40,11 @@ function App() {
 
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append('file', selectedFile);
+    // const binary = new Binary()
+
+    // onst formData = new FormData();
+    // formData.append('file', selectedFile);
+    const blob = new Blob([selectedFile], { type: 'image/jpeg' });
 
     // Extract filename from the selected file
     const filename = selectedFile.name;
@@ -49,7 +52,7 @@ function App() {
     try {
       const response = await fetch(`${API_URL}/upload`, {
         method: 'POST',
-        body: formData,
+        body: blob,
         headers: {
           // Pass the filename as a custom header
           'X-Filename': filename,
@@ -76,17 +79,33 @@ function App() {
 
   return (
     <>
-      
       <h1>S3 Image Uploader</h1>
-        <div id='main-content'>
+      <div id="main-content">
         <input type="file" onChange={handleFileChange} />
         <button onClick={handleUpload}>Upload File</button>
         <div>
-          <img id='loading-img' src='./img/loading.gif' style={getLoadingImgStyle(loading)}></img>
-          {imageUrl && <img src={imageUrl} alt="Selected" style={{ width: '500px',margin:'10px', borderRadius: '2%', border: '2px solid white' }} />}
+          <img
+            id="loading-img"
+            src="./img/loading.gif"
+            style={getLoadingImgStyle(loading)}
+          ></img>
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt="Selected"
+              style={{
+                width: '500px',
+                margin: '10px',
+                borderRadius: '2%',
+                border: '2px solid white',
+              }}
+            />
+          )}
         </div>
         <br></br>
-        <p id="resultText" style={{ color: textColor }}>{response}</p>
+        <p id="resultText" style={{ color: textColor }}>
+          {response}
+        </p>
       </div>
     </>
   );
